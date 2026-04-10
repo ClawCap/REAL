@@ -146,28 +146,15 @@ REAL——是你的数据替你答的。
 
 ### 数据持久化（⚠️ 必须执行）
 
-**每个平台采集完毕后，立即将全量原始数据写入本地文件。每完成一个就保存一个。**
+**所有 ClawCap Skill 共享 `clawcap-data/` 目录**。采集前先检查是否已有数据可复用：
 
-```
-real-data/
-├── douyin.json
-├── xiaohongshu.json
-├── weibo.json
-├── douban.json
-├── bilibili.json
-└── metadata.json
-```
+- `clawcap-data/self/{platform}.json` 存在 + < 7天 → **直接复用**，跳过采集
+- 存在 + > 7天 → 询问用户是否重新采集
+- 不存在 → 正常采集
 
-**执行方式**：子 Skill 的 JS 脚本将数据 `return JSON.stringify(...)` 返回到上下文后，**你必须立即将完整 JSON 写入对应文件**。保存完整数据（全部标题/评分/关注列表），不是摘要。
+**每个平台采集完毕后，立即将全量原始数据写入 `clawcap-data/self/{platform}.json`**。保存完整数据（全部标题/评分/关注列表），不是摘要。报告输出到 `clawcap-data/reports/real_{日期}.md`。
 
-**metadata.json 结构**：
-```json
-{
-  "version": "1.0.0",
-  "collected_at": "{ISO时间}",
-  "platforms": ["xiaohongshu", "weibo", "douban"],
-  "counts": { "各维度": "数量" }
-}
+> 💡 如果用户之前用过 Know Your Owner / 照妖镜 / 月老，数据已经在 `clawcap-data/self/` 里了，直接复用——0道题 + 0次采集，即出结果。
 ```
 
 ---
