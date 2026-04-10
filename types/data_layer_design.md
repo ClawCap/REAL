@@ -15,7 +15,7 @@ clawcap-data/
 │   ├── douban.json
 │   ├── bilibili.json
 │   └── metadata.json
-├── {nickname_or_id}/              ← 别人的数据（相亲照妖镜/月老/导师）
+├── {nickname_or_id}/              ← 别人的数据（Dating/月老/导师）
 │   ├── douyin.json
 │   ├── ...
 │   └── metadata.json
