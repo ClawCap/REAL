@@ -348,25 +348,52 @@ TOP 1 占比 ≤ 50% → W（广泛型）
 
 ---
 
-## 5. 呈现 & 分享引导
+## 5. 生成分享卡片（⚠️ 必须执行）
+
+**完整报告含隐私数据（收藏/关注明细），用户不会愿意传播。分享卡片只包含类型结果，零隐私，专为截图传播设计。**
+
+读取 `templates/share_card.html` 模板，替换以下占位符生成最终 HTML 文件：
+
+| 占位符 | 内容 | 示例 |
+|--------|------|------|
+| `{{EMOJI}}` | 类型 emoji | 🐹 |
+| `{{CODE}}` | 4 字母代码 | ELWR |
+| `{{NAME}}` | 中文类型名 | 仓鼠 |
+| `{{MATCH}}` | 匹配度 | 87 |
+| `{{DIM1_CLASS}}` | 维度1 CSS class | eat / create |
+| `{{DIM1_PCT}}` | 维度1 倾向强度% | 95 |
+| `{{DIM1_LETTER}}` | 维度1 字母 | E |
+| `{{DIM2_CLASS}}` / `{{DIM2_PCT}}` / `{{DIM2_LETTER}}` | 社交温度 | hot / low |
+| `{{DIM3_CLASS}}` / `{{DIM3_PCT}}` / `{{DIM3_LETTER}}` | 兴趣广度 | wide / deep |
+| `{{DIM4_CLASS}}` / `{{DIM4_PCT}}` / `{{DIM4_LETTER}}` | 表里一致 | real / play |
+| `{{TAGLINE}}` | 类型一句话 + 趣味描述 | 互联网的松鼠，默默囤坚果从不吃 |
+| `{{HIGHLIGHT}}` | 1-2 个不涉隐私的亮点数据 | 消费/创作比 = 20:1 |
+
+**CSS class 对照**：维度1用 `create`/`eat`，维度2用 `hot`/`low`，维度3用 `wide`/`deep`，维度4用 `real`/`play`。
+
+生成后保存到 `clawcap-data/reports/real_share_card.html`，然后用浏览器打开让用户截图：
 
 ```
-🔍 测完了。
+🔍 测完了！你的 REAL 人格：
 
-{类型卡片}
+{CODE}「{名称}」{emoji} — 匹配度 {MATCH}%
 
-{完整报告}
+📸 我已经帮你生成了分享卡片，截图就能发朋友圈/小红书！
+   → {打开 real_share_card.html}
 
----
+🔒 分享卡片只有类型结果，不包含任何收藏/关注等隐私数据，放心发。
 
-📸 截图发朋友圈/小红书的推荐配文：
+📝 推荐配文：
 "SBTI是自己答的，REAL是数据替你答的。我是{CODE}「{名称}」{emoji}"
 
 🔗 想测的朋友：github.com/ClawCap/REAL
+```
+
+完整报告（含数据明细）单独保存到 `clawcap-data/reports/real_{日期}.md`，仅供用户自己查看。
 
 💡 你还可以：
 - 🪞 照妖镜 — 看你的完整反差报告
-- 🎯 月老 — 和另一个人测匹配度（先各自测 REAL，然后看你们的类型配不配）
+- 🎯 月老 — 和另一个人测匹配度
 ```
 
 ---

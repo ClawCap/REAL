@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REAL 人格测试结果</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0a0a0a;
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+  }
+
+  .card {
+    width: 380px;
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 24px;
+    padding: 36px 28px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .emoji {
+    font-size: 64px;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  }
+
+  .type-code {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    color: #e2e8f0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .type-name {
+    font-size: 20px;
+    color: #94a3b8;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .match {
+    display: inline-block;
+    background: rgba(99, 102, 241, 0.2);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 14px;
+    color: #a5b4fc;
+    margin-top: 8px;
+  }
+
+  .dimensions {
+    margin: 24px 0;
+  }
+
+  .dim-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .dim-label {
+    width: 60px;
+    font-size: 12px;
+    color: #64748b;
+    text-align: right;
+    padding-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .dim-bar-container {
+    flex: 1;
+    height: 24px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dim-bar {
+    height: 100%;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    transition: width 0.5s ease;
+  }
+
+  .dim-bar.create  { background: linear-gradient(90deg, #6366f1, #818cf8); }
+  .dim-bar.eat     { background: linear-gradient(90deg, #818cf8, #6366f1); }
+  .dim-bar.hot     { background: linear-gradient(90deg, #f43f5e, #fb7185); }
+  .dim-bar.low     { background: linear-gradient(90deg, #fb7185, #f43f5e); }
+  .dim-bar.wide    { background: linear-gradient(90deg, #10b981, #34d399); }
+  .dim-bar.deep    { background: linear-gradient(90deg, #34d399, #10b981); }
+  .dim-bar.real    { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .dim-bar.play    { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+
+  .dim-letter {
+    width: 24px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  .dim-letter.active { color: #e2e8f0; }
+  .dim-letter.inactive { color: #334155; }
+
+  .tagline {
+    text-align: center;
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 20px 0;
+    padding: 0 8px;
+    font-style: italic;
+  }
+
+  .highlight {
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+    margin: 16px 0;
+  }
+
+  .highlight span {
+    color: #a5b4fc;
+    font-weight: 600;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .brand {
+    font-size: 11px;
+    color: #475569;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .slogan {
+    font-size: 11px;
+    color: #334155;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <span class="emoji">{{EMOJI}}</span>
+    <div class="type-code">{{CODE}}</div>
+    <div class="type-name">「{{NAME}}」</div>
+    <div class="match">匹配度 {{MATCH}}%</div>
+  </div>
+
+  <div class="dimensions">
+    <div class="dim-row">
+      <div class="dim-label">创造/消费</div>
+      <div class="dim-bar-container">
+        <div class="dim-bar {{DIM1_CLASS}}" style="width: {{DIM1_PCT}}%">{{DIM1_PCT}}%</div>
+      </div>
+      <div class="dim-letter active">{{DIM1_LETTER}}</div>
+    </div>
+    <div class="dim-row">
+      <div class="dim-label">社交温度</div>
+      <div class="dim-bar-container">
+        <div class="dim-bar {{DIM2_CLASS}}" style="width: {{DIM2_PCT}}%">{{DIM2_PCT}}%</div>
+      </div>
+      <div class="dim-letter active">{{DIM2_LETTER}}</div>
+    </div>
+    <div class="dim-row">
+      <div class="dim-label">兴趣广度</div>
+      <div class="dim-bar-container">
+        <div class="dim-bar {{DIM3_CLASS}}" style="width: {{DIM3_PCT}}%">{{DIM3_PCT}}%</div>
+      </div>
+      <div class="dim-letter active">{{DIM3_LETTER}}</div>
+    </div>
+    <div class="dim-row">
+      <div class="dim-label">表里一致</div>
+      <div class="dim-bar-container">
+        <div class="dim-bar {{DIM4_CLASS}}" style="width: {{DIM4_PCT}}%">{{DIM4_PCT}}%</div>
+      </div>
+      <div class="dim-letter active">{{DIM4_LETTER}}</div>
+    </div>
+  </div>
+
+  <div class="tagline">{{TAGLINE}}</div>
+
+  <div class="highlight">{{HIGHLIGHT}}</div>
+
+  <div class="footer">
+    <div class="brand">REAL · Reading Everyone's Actual Life</div>
+    <div class="slogan">SBTI 是自己答的，REAL 是数据替你答的</div>
+  </div>
+</div>
+</body>
+</html>
