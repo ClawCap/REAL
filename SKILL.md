@@ -376,7 +376,22 @@ TOP 1 占比 ≤ 50% → W（广泛型）
 
 **数据快照选取原则**：只用聚合统计数据（比例、数量、百分比），不暴露具体内容（不出现收藏标题、关注的人名、平台昵称）。
 
-生成后保存到 `clawcap-data/reports/real_share_card.html`，然后用浏览器打开让用户截图：
+生成后保存 HTML 和 PNG 两个版本：
+
+```bash
+# 1. 保存填充后的 HTML
+→ clawcap-data/reports/real_share_card.html
+
+# 2. 用截图脚本生成高清 PNG（3x 分辨率，适合手机）
+node {SKILL目录}/scripts/card_screenshot.js clawcap-data/reports/real_share_card.html clawcap-data/reports/real_share_card.png
+
+# 首次运行需要安装浏览器内核：
+# npm install -g playwright-core && npx playwright install chromium
+```
+
+**PNG 是用户最终拿到的文件**——保存到手机直接发朋友圈/小红书，比 HTML 方便得多。
+
+呈现方式：
 
 ```
 🔍 测完了！你的 REAL 人格：
