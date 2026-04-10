@@ -144,17 +144,29 @@ REAL——是你的数据替你答的。
 
 > ⚠️ **JS 脚本必须完整复制执行**，不要简化。
 
-### 采集后保存
+### 数据持久化（⚠️ 必须执行）
 
-写入 `real-data/{日期}_raw.json`，结构：
+**每个平台采集完毕后，立即将全量原始数据写入本地文件。每完成一个就保存一个。**
+
+```
+real-data/
+├── douyin.json
+├── xiaohongshu.json
+├── weibo.json
+├── douban.json
+├── bilibili.json
+└── metadata.json
+```
+
+**执行方式**：子 Skill 的 JS 脚本将数据 `return JSON.stringify(...)` 返回到上下文后，**你必须立即将完整 JSON 写入对应文件**。保存完整数据（全部标题/评分/关注列表），不是摘要。
+
+**metadata.json 结构**：
 ```json
 {
+  "version": "1.0.0",
+  "collected_at": "{ISO时间}",
   "platforms": ["xiaohongshu", "weibo", "douban"],
-  "public_content": { "posts": [], "tags": [], "topics": [] },
-  "private_behavior": { "saves": [], "likes": [], "follows": [] },
-  "interactions": { "comments": 0, "replies": 0, "mentions": 0 },
-  "post_times": [],
-  "profile": { "name": "", "bio": "", "followers": 0, "following": 0 }
+  "counts": { "各维度": "数量" }
 }
 ```
 
