@@ -367,9 +367,14 @@ TOP 1 占比 ≤ 50% → W（广泛型）
 | `{{DIM3_CLASS}}` / `{{DIM3_PCT}}` / `{{DIM3_LETTER}}` | 兴趣广度 | wide / deep |
 | `{{DIM4_CLASS}}` / `{{DIM4_PCT}}` / `{{DIM4_LETTER}}` | 表里一致 | real / play |
 | `{{TAGLINE}}` | 类型一句话 + 趣味描述 | 互联网的松鼠，默默囤坚果从不吃 |
-| `{{HIGHLIGHT}}` | 1-2 个不涉隐私的亮点数据 | 消费/创作比 = 20:1 |
+| `{{DATA1_LABEL}}` ~ `{{DATA4_LABEL}}` | 数据快照标签（不涉隐私的统计指标） | 消费/创作比 |
+| `{{DATA1_VALUE}}` ~ `{{DATA4_VALUE}}` | 对应数据值 | 20 : 1 |
+| `{{ROAST}}` | 扎心一句话（具体但不暴露隐私） | 收藏了 1074 条内容，但原创只有 54 条 |
+| `{{BEHAVIOR1}}` ~ `{{BEHAVIOR3}}` | "你一定做过这些事"（3条，基于类型特征） | 收藏夹有几百条内容，但从没回去翻过 |
 
 **CSS class 对照**：维度1用 `create`/`eat`，维度2用 `hot`/`low`，维度3用 `wide`/`deep`，维度4用 `real`/`play`。
+
+**数据快照选取原则**：只用聚合统计数据（比例、数量、百分比），不暴露具体内容（不出现收藏标题、关注的人名、平台昵称）。
 
 生成后保存到 `clawcap-data/reports/real_share_card.html`，然后用浏览器打开让用户截图：
 
