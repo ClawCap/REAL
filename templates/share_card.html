@@ -42,10 +42,13 @@
     margin-bottom: 20px;
   }
 
-  .emoji {
-    font-size: 56px;
+  .animal-icon {
+    width: 96px;
+    height: 96px;
+    image-rendering: pixelated;
+    margin: 0 auto 8px auto;
     display: block;
-    margin-bottom: 8px;
+    border-radius: 12px;
   }
 
   .type-code {
@@ -251,7 +254,7 @@
 <body>
 <div class="card">
   <div class="header">
-    <span class="emoji">{{EMOJI}}</span>
+    <img class="animal-icon" src="{{ANIMAL_IMG}}" alt="{{NAME}}" />
     <div class="type-code">{{CODE}}</div>
     <div class="type-name">「{{NAME}}」</div>
     <div class="match">匹配度 {{MATCH}}%</div>
